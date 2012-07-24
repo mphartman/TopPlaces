@@ -29,7 +29,9 @@
 {
     [super viewDidLoad];
     
-    self.topPlaces = [FlickrFetcher topPlaces];    
+    NSSortDescriptor *photoPlaceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:FLICKR_PLACE_NAME ascending:YES];
+    
+    self.topPlaces = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:photoPlaceSortDescriptor]];
 }
 
 - (void)viewDidUnload
