@@ -8,6 +8,9 @@
 
 #import "TopPlacesViewController.h"
 #import "FlickrFetcher.h"
+#import "PhotosTableViewController.h"
+
+#define MAX_PHOTOS 50
 
 @interface TopPlacesViewController ()
 @end
@@ -15,6 +18,16 @@
 @implementation TopPlacesViewController
 
 @synthesize topPlaces = _topPlaces;
+
+- (NSString *)placeNameFromPhoto: (NSDictionary *)photoDetails
+{
+    NSString *placeName = [photoDetails valueForKeyPath:FLICKR_PLACE_NAME];
+    NSArray *parts = [placeName componentsSeparatedByString:@","];
+    if (parts.count > 0) {
+        return [parts objectAtIndex:0];
+    }
+    return nil;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -50,6 +63,17 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Show Photos of Place"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSDictionary *photoDetails = [self.topPlaces objectAtIndex:indexPath.row];
+        PhotosTableViewController *viewController = segue.destinationViewController;      
+        viewController.title = [self placeNameFromPhoto:photoDetails];
+        viewController.photosInPlace = [FlickrFetcher photosInPlace:photoDetails maxResults:MAX_PHOTOS];
+    }
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -63,15 +87,17 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     NSDictionary *photoDetails = [self.topPlaces objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self placeNameFromPhoto:photoDetails];
+
     NSString * placeName = [photoDetails valueForKeyPath:FLICKR_PLACE_NAME];
     NSArray *parts = [placeName componentsSeparatedByString:@","];
-    cell.textLabel.text = [parts objectAtIndex:0];
     if (parts.count > 2) {
         cell.detailTextLabel.text = [parts objectAtIndex:1];
     } 
     else {
         cell.detailTextLabel.text = nil;
     }
+    
     return cell;
 }
 

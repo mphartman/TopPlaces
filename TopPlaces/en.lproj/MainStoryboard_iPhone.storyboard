@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="g2w-lo-yPJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="6Dr-WY-dXx">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
-        <!--Top Places View Controller-->
+        <!--Top Places View Controller - Top Places-->
         <scene sceneID="aVB-8f-4RP">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yrf-cQ-lfy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="g2w-lo-yPJ" customClass="TopPlacesViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ajm-Bk-90S">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Top Place Description" textLabel="9nS-1t-O8x" detailTextLabel="MOc-29-l5o" style="IBUITableViewCellStyleSubtitle" id="ZYd-Z2-9Ss">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Top Place Description" textLabel="9nS-1t-O8x" detailTextLabel="MOc-29-l5o" style="IBUITableViewCellStyleSubtitle" id="ZYd-Z2-9Ss">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9nS-1t-O8x">
@@ -40,6 +40,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="TWr-n6-TcP" kind="push" identifier="Show Photos of Place" id="J3o-hN-skm"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -47,17 +50,18 @@
                             <outlet property="delegate" destination="g2w-lo-yPJ" id="F65-vb-fGg"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Top Places" id="xIC-z6-KDJ"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-102" y="-37"/>
+            <point key="canvasLocation" x="389" y="-37"/>
         </scene>
-        <!--Photos Table View Controller-->
+        <!--Photos Table View Controller - Photos-->
         <scene sceneID="43b-IC-cBZ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Wg-Kc-efp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="TWr-n6-TcP" customClass="PhotosTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EXG-YC-VRh">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -92,10 +96,28 @@
                             <outlet property="delegate" destination="TWr-n6-TcP" id="209-9o-jFm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Up7-Et-UGZ"/>
+                    <navigationItem key="navigationItem" title="Photos" id="Up7-Et-UGZ"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="334" y="-32"/>
+            <point key="canvasLocation" x="860" y="-37"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EM8-hg-oWc">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="39X-Zr-nYE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="6Dr-WY-dXx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Nlc-ed-ejg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="g2w-lo-yPJ" kind="relationship" relationship="rootViewController" id="Cc7-JJ-rZF"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-102" y="-37"/>
         </scene>
     </scenes>
     <classes>

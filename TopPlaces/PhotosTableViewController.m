@@ -66,8 +66,21 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     NSDictionary *photo = [self.photosInPlace objectAtIndex:indexPath.row];
-    cell.textLabel.text = [photo valueForKeyPath:FLICKR_PHOTO_TITLE];
-    cell.detailTextLabel.text = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+
+    // If the photo has no title, use its description as the title. 
+    // If it has no title or description, use “Unknown” as the title.
+    NSString *title = [photo valueForKeyPath:FLICKR_PHOTO_TITLE];
+    NSString *description;
+    if (title.length == 0) {
+        title = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+    } else {
+        description = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+    }
+    if (title.length == 0) {
+        title = @"Unknown";
+    }
+    cell.textLabel.text = title;
+    cell.detailTextLabel.text = description;
     return cell;
 }
 
