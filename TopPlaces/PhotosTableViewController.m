@@ -8,6 +8,7 @@
 
 #import "PhotosTableViewController.h"
 #import "FlickrFetcher.h"
+#import "PhotoDetailViewController.h"
 
 @interface PhotosTableViewController ()
 
@@ -50,6 +51,20 @@
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {
         return YES;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Show Photo Detail"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSDictionary *photoDetails = [self.photosInPlace objectAtIndex:indexPath.row];
+        //NSLog(@"%@", [photoDetails valueForKeyPath:FLICKR_PHOTO_ID]);
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        NSURL *photoURL = [FlickrFetcher urlForPhoto:photoDetails format:FlickrPhotoFormatLarge];
+        PhotoDetailViewController *viewController = segue.destinationViewController;
+        viewController.title = cell.textLabel.text;
+        viewController.photoURL = photoURL;
     }
 }
 
