@@ -17,6 +17,7 @@
 		49C6CB2015B9E31000A03BB7 /* TopPlacesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C6CB1F15B9E31000A03BB7 /* TopPlacesAppDelegate.m */; };
 		49C6CB2315B9E31000A03BB7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C6CB2115B9E31000A03BB7 /* MainStoryboard_iPhone.storyboard */; };
 		49C6CB2615B9E31000A03BB7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C6CB2415B9E31000A03BB7 /* MainStoryboard_iPad.storyboard */; };
+		49CC438F15BF720A00D713A6 /* PhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		49C6CB1F15B9E31000A03BB7 /* TopPlacesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopPlacesAppDelegate.m; sourceTree = "<group>"; };
 		49C6CB2215B9E31000A03BB7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		49C6CB2515B9E31000A03BB7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		49CC438D15BF720A00D713A6 /* PhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosTableViewController.h; sourceTree = "<group>"; };
+		49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,8 @@
 				49C6CB2415B9E31000A03BB7 /* MainStoryboard_iPad.storyboard */,
 				4997F04615BE399700AE6ADD /* TopPlacesViewController.h */,
 				4997F04715BE399700AE6ADD /* TopPlacesViewController.m */,
+				49CC438D15BF720A00D713A6 /* PhotosTableViewController.h */,
+				49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */,
 				49C6CB1615B9E31000A03BB7 /* Supporting Files */,
 			);
 			path = TopPlaces;
@@ -185,6 +190,7 @@
 				49C6CB2015B9E31000A03BB7 /* TopPlacesAppDelegate.m in Sources */,
 				4931722915BCD73D00E7B1D7 /* FlickrFetcher.m in Sources */,
 				4997F04815BE399700AE6ADD /* TopPlacesViewController.m in Sources */,
+				49CC438F15BF720A00D713A6 /* PhotosTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
