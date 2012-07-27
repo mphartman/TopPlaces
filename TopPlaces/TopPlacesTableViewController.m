@@ -6,16 +6,16 @@
 //  Copyright (c) 2012 Piwiggi. All rights reserved.
 //
 
-#import "TopPlacesViewController.h"
+#import "TopPlacesTableViewController.h"
 #import "FlickrFetcher.h"
 #import "PhotosTableViewController.h"
 
 #define MAX_PHOTOS 50
 
-@interface TopPlacesViewController ()
+@interface TopPlacesTableViewController ()
 @end
 
-@implementation TopPlacesViewController
+@implementation TopPlacesTableViewController
 
 @synthesize topPlaces = _topPlaces;
 
@@ -82,7 +82,7 @@
         PhotosTableViewController *viewController = segue.destinationViewController;      
         viewController.title = [self placeNameFromPhoto:topPlace];
         NSLog(@"Loading photos for place from Flickr...");
-        viewController.photosInPlace = [FlickrFetcher photosInPlace:topPlace maxResults:MAX_PHOTOS];
+        viewController.photos = [FlickrFetcher photosInPlace:topPlace maxResults:MAX_PHOTOS];
     }
 }
 

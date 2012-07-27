@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopPlacesViewController : UITableViewController
+@interface TopPlacesTableViewController : UITableViewController
 @property (nonatomic, strong) NSArray *topPlaces;
 @end
