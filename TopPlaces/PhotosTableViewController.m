@@ -16,12 +16,12 @@
 
 @implementation PhotosTableViewController
 
-@synthesize photos = _photos;
+@synthesize photoDetails = _photoDetails;
 
-- (void)setPhotos:(NSArray *)photos
+- (void)setPhotoDetails:(NSArray *)photoDetails
 {
-    if (_photos != photos) {
-        _photos = photos;
+    if (_photoDetails != photoDetails) {
+        _photoDetails = photoDetails;
         [self.tableView reloadData];
     }
 }
@@ -39,7 +39,7 @@
 {
     if ([segue.identifier isEqualToString:@"Show Photo Detail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDictionary *photo = [self.photos objectAtIndex:indexPath.row];
+        NSDictionary *photo = [self.photoDetails objectAtIndex:indexPath.row];
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         PhotoDetailViewController *viewController = segue.destinationViewController;
         viewController.title = cell.textLabel.text;
@@ -51,7 +51,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.photos.count;
+    return self.photoDetails.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,7 +59,7 @@
     static NSString *CellIdentifier = @"Photo Description";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    NSDictionary *photo = [self.photos objectAtIndex:indexPath.row];
+    NSDictionary *photo = [self.photoDetails objectAtIndex:indexPath.row];
 
     // If the photo has no title, use its description as the title. 
     // If it has no title or description, use “Unknown” as the title.

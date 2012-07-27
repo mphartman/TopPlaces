@@ -60,7 +60,7 @@
         PhotosTableViewController *viewController = segue.destinationViewController;      
         viewController.title = [self placeNameFromPhoto:place];
         //NSLog(@"Loading photos for place from Flickr...");
-        viewController.photos = [FlickrFetcher photosInPlace:place maxResults:MAX_PHOTOS];
+        viewController.photoDetails = [FlickrFetcher photosInPlace:place maxResults:MAX_PHOTOS];
     }
 }
 
