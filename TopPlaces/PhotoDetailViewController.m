@@ -33,14 +33,20 @@
 - (void)loadPhoto
 {
     if (!self.newPhoto) return;
-    NSLog(@"Loading photo from Flickr...");
+    self.newPhoto = NO;
+    //NSLog(@"Loading photo from Flickr...");
     NSURL *photoURL = [FlickrFetcher urlForPhoto:self.photoDetails format:FlickrPhotoFormatLarge];
     NSData *bits = [NSData dataWithContentsOfURL:photoURL];
     UIImage *image = [UIImage imageWithData:bits];
     self.imageView.image = image;
     self.scrollView.contentSize = self.imageView.image.size;
     self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
-    self.newPhoto = NO;
+
+    // zoom image to make "best fit"
+    CGFloat widthRatio = self.scrollView.bounds.size.width / image.size.width;
+    CGFloat heightRatio = self.scrollView.bounds.size.height / image.size.height;
+    CGFloat ratio = MAX(widthRatio, heightRatio);
+    [self.scrollView setZoomScale:ratio animated:YES];
 }
 
 - (void)addPhotoToRecents
@@ -66,15 +72,6 @@
     
     [prefs setObject:recents forKey:@"TopPlaces.RecentPhotos"];
     [prefs synchronize];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
