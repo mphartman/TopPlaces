@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4931722915BCD73D00E7B1D7 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4931722815BCD73D00E7B1D7 /* FlickrFetcher.m */; };
 		4997F04815BE399700AE6ADD /* TopPlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997F04715BE399700AE6ADD /* TopPlacesViewController.m */; };
+		49C0A8C915C22550001587C7 /* RecentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C0A8C815C22550001587C7 /* RecentsTableViewController.m */; };
 		49C6CB1015B9E31000A03BB7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C6CB0F15B9E31000A03BB7 /* UIKit.framework */; };
 		49C6CB1215B9E31000A03BB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C6CB1115B9E31000A03BB7 /* Foundation.framework */; };
 		49C6CB1415B9E31000A03BB7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C6CB1315B9E31000A03BB7 /* CoreGraphics.framework */; };
@@ -27,6 +28,8 @@
 		4931722815BCD73D00E7B1D7 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrFetcher.m; path = TopPlaces/Flickr/FlickrFetcher.m; sourceTree = "<group>"; };
 		4997F04615BE399700AE6ADD /* TopPlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlacesViewController.h; sourceTree = "<group>"; };
 		4997F04715BE399700AE6ADD /* TopPlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesViewController.m; sourceTree = "<group>"; };
+		49C0A8C715C22550001587C7 /* RecentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsTableViewController.h; sourceTree = "<group>"; };
+		49C0A8C815C22550001587C7 /* RecentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsTableViewController.m; sourceTree = "<group>"; };
 		49C6CB0B15B9E31000A03BB7 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C6CB0F15B9E31000A03BB7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		49C6CB1115B9E31000A03BB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,8 +103,6 @@
 		49C6CB1515B9E31000A03BB7 /* TopPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				49C6CB1E15B9E31000A03BB7 /* TopPlacesAppDelegate.h */,
-				49C6CB1F15B9E31000A03BB7 /* TopPlacesAppDelegate.m */,
 				49C6CB2115B9E31000A03BB7 /* MainStoryboard_iPhone.storyboard */,
 				49C6CB2415B9E31000A03BB7 /* MainStoryboard_iPad.storyboard */,
 				4997F04615BE399700AE6ADD /* TopPlacesViewController.h */,
@@ -110,6 +111,8 @@
 				49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */,
 				49CC439515BF880A00D713A6 /* PhotoDetailViewController.h */,
 				49CC439615BF880A00D713A6 /* PhotoDetailViewController.m */,
+				49C0A8C715C22550001587C7 /* RecentsTableViewController.h */,
+				49C0A8C815C22550001587C7 /* RecentsTableViewController.m */,
 				49C6CB1615B9E31000A03BB7 /* Supporting Files */,
 			);
 			path = TopPlaces;
@@ -118,6 +121,8 @@
 		49C6CB1615B9E31000A03BB7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49C6CB1E15B9E31000A03BB7 /* TopPlacesAppDelegate.h */,
+				49C6CB1F15B9E31000A03BB7 /* TopPlacesAppDelegate.m */,
 				49C6CB1715B9E31000A03BB7 /* TopPlaces-Info.plist */,
 				49C6CB1815B9E31000A03BB7 /* InfoPlist.strings */,
 				49C6CB1B15B9E31000A03BB7 /* main.m */,
@@ -197,6 +202,7 @@
 				4997F04815BE399700AE6ADD /* TopPlacesViewController.m in Sources */,
 				49CC438F15BF720A00D713A6 /* PhotosTableViewController.m in Sources */,
 				49CC439715BF880A00D713A6 /* PhotoDetailViewController.m in Sources */,
+				49C0A8C915C22550001587C7 /* RecentsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

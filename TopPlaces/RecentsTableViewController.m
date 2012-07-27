@@ -1,27 +1,28 @@
 //
-//  PhotosTableViewController.m
+//  RecentsTableViewController.m
 //  TopPlaces
 //
-//  Created by Michael Hartman on 7/24/12.
+//  Created by Hartman on 7/26/12.
 //  Copyright (c) 2012 Piwiggi. All rights reserved.
 //
 
-#import "PhotosTableViewController.h"
+#import "RecentsTableViewController.h"
 #import "FlickrFetcher.h"
-#import "PhotoDetailViewController.h"
 
-@interface PhotosTableViewController ()
-
+@interface RecentsTableViewController ()
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *recentPhotos;
 @end
 
-@implementation PhotosTableViewController
+@implementation RecentsTableViewController
 
-@synthesize photosInPlace = _photosInPlace;
+@synthesize tableView = _tableView;
+@synthesize recentPhotos = _recentPhotos;
 
-- (void)setPhotosInPlace:(NSArray *)photosInPlace 
+- (void)setRecentPhotos:(NSArray *)recentPhotos
 {
-    if (_photosInPlace != photosInPlace) {
-        _photosInPlace = photosInPlace;
+    if (_recentPhotos != recentPhotos) {
+        _recentPhotos = recentPhotos;
         [self.tableView reloadData];
     }
 }
@@ -47,6 +48,12 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    self.recentPhotos = [prefs objectForKey:@"TopPlaces.RecentPhotos"];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -56,46 +63,21 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"Show Photo Detail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDictionary *photoDetails = [self.photosInPlace objectAtIndex:indexPath.row];
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        PhotoDetailViewController *viewController = segue.destinationViewController;
-        viewController.title = cell.textLabel.text;
-        viewController.photoDetails = photoDetails;
-    }
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.photosInPlace.count;
+    return self.recentPhotos.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Photo Description";
+    static NSString *CellIdentifier = @"Recent Photo Description";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    NSDictionary *photo = [self.photosInPlace objectAtIndex:indexPath.row];
-
-    // If the photo has no title, use its description as the title. 
-    // If it has no title or description, use “Unknown” as the title.
-    NSString *title = [photo valueForKeyPath:FLICKR_PHOTO_TITLE];
-    NSString *description;
-    if (title.length == 0) {
-        title = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
-    } else {
-        description = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
-    }
-    if (title.length == 0) {
-        title = @"Unknown";
-    }
-    cell.textLabel.text = title;
-    cell.detailTextLabel.text = description;
+    cell.textLabel.text = [[self.recentPhotos objectAtIndex:indexPath.row] valueForKeyPath:FLICKR_PHOTO_TITLE];
+    cell.detailTextLabel.text = nil;
+    
     return cell;
 }
 
@@ -114,7 +96,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -142,6 +124,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
 }
 
 @end

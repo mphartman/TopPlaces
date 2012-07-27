@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotosTableViewController : UITableViewController
-@property (nonatomic, strong) NSArray *photosInPlace;
+@property (nonatomic, strong) NSArray *photosInPlace;  // array of NSDictionary describing Flickr photos
 @end

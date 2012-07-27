@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotoDetailViewController : UIViewController
-@property (nonatomic, strong) NSURL *photoURL;
+@property (nonatomic, strong) NSDictionary *photoDetails;  // a Flickr photo
 @end

@@ -19,6 +19,13 @@
 
 @synthesize topPlaces = _topPlaces;
 
+- (void)setTopPlaces:(NSArray *)topPlaces
+{
+    if (_topPlaces != topPlaces) {
+        _topPlaces = topPlaces;
+        [self.tableView reloadData];
+    }
+}
 - (NSString *)placeNameFromPhoto: (NSDictionary *)photoDetails
 {
     NSString *placeName = [photoDetails valueForKeyPath:FLICKR_PLACE_NAME];
@@ -42,9 +49,6 @@
 {
     [super viewDidLoad];
     
-    NSSortDescriptor *photoPlaceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:FLICKR_PLACE_NAME ascending:YES];
-    
-    self.topPlaces = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:photoPlaceSortDescriptor]];
 }
 
 - (void)viewDidUnload
@@ -52,6 +56,13 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSSortDescriptor *photoPlaceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:FLICKR_PLACE_NAME ascending:YES];
+    NSLog(@"Loading top places from Flickr...");
+    self.topPlaces = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:photoPlaceSortDescriptor]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -67,10 +78,11 @@
 {
     if ([segue.identifier isEqualToString:@"Show Photos of Place"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDictionary *photoDetails = [self.topPlaces objectAtIndex:indexPath.row];
+        NSDictionary *topPlace = [self.topPlaces objectAtIndex:indexPath.row];
         PhotosTableViewController *viewController = segue.destinationViewController;      
-        viewController.title = [self placeNameFromPhoto:photoDetails];
-        viewController.photosInPlace = [FlickrFetcher photosInPlace:photoDetails maxResults:MAX_PHOTOS];
+        viewController.title = [self placeNameFromPhoto:topPlace];
+        NSLog(@"Loading photos for place from Flickr...");
+        viewController.photosInPlace = [FlickrFetcher photosInPlace:topPlace maxResults:MAX_PHOTOS];
     }
 }
 
