@@ -11,7 +11,6 @@
 
 @interface RecentsTableViewController ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *recentPhotos;
 @end
 
 @implementation RecentsTableViewController

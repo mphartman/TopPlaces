@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RecentsTableViewController : UITableViewController
-
+@property (nonatomic, strong) NSArray *recentPhotos; // array of NSDictionary with Flickr photo details
 @end
