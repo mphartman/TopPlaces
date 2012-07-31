@@ -12,7 +12,6 @@
 @interface PhotoDetailViewController () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (nonatomic) BOOL newPhoto;
 @end
 
 @implementation PhotoDetailViewController
@@ -20,33 +19,31 @@
 @synthesize scrollView = _scrollView;
 @synthesize imageView = _imageView;
 @synthesize photoDetails = _photoDetails;
-@synthesize newPhoto = _newPhoto;
 
-- (void)setPhotoDetails:(NSDictionary *)photoDetails
+- (void)loadPhotoImage
 {
-    if (_photoDetails != photoDetails) {
-        _photoDetails = photoDetails;
-        self.newPhoto = YES;
-    }
-}
-
-- (void)loadPhoto
-{
-    if (!self.newPhoto) return;
-    self.newPhoto = NO;
-    //NSLog(@"Loading photo from Flickr...");
-    NSURL *photoURL = [FlickrFetcher urlForPhoto:self.photoDetails format:FlickrPhotoFormatLarge];
-    NSData *bits = [NSData dataWithContentsOfURL:photoURL];
-    UIImage *image = [UIImage imageWithData:bits];
-    self.imageView.image = image;
-    self.scrollView.contentSize = self.imageView.image.size;
-    self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
-
-    // zoom image to make "best fit"
-    CGFloat widthRatio = self.scrollView.bounds.size.width / image.size.width;
-    CGFloat heightRatio = self.scrollView.bounds.size.height / image.size.height;
-    CGFloat ratio = MAX(widthRatio, heightRatio);
-    [self.scrollView setZoomScale:ratio animated:YES];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image download", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSLog(@"Loading photo %@ from Flickr...", [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID]);
+        NSURL *photoURL = [FlickrFetcher urlForPhoto:self.photoDetails format:FlickrPhotoFormatLarge];
+        NSData *bits = [NSData dataWithContentsOfURL:photoURL];
+        UIImage *image = [UIImage imageWithData:bits];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.imageView.image = image;
+            self.scrollView.contentSize = self.imageView.image.size;
+            self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
+            // zoom image to make "best fit"
+            CGFloat widthRatio = self.scrollView.bounds.size.width / image.size.width;
+            CGFloat heightRatio = self.scrollView.bounds.size.height / image.size.height;
+            CGFloat ratio = MAX(widthRatio, heightRatio);
+            [self.scrollView setZoomScale:ratio animated:NO];
+            self.navigationItem.rightBarButtonItem = nil;
+        });
+    });
 }
 
 - (void)addPhotoToRecents
@@ -60,13 +57,13 @@
     // add this photo to the top of list of recents, avoiding adding duplicates based on Photo ID
     BOOL found = NO;
     NSString *photoId = [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID];
-    for (NSDictionary *photoDetails in recents) {
-        if ([photoId isEqualToString:[photoDetails valueForKeyPath:FLICKR_PHOTO_ID]]) {
+    for (NSDictionary *recentPhoto in recents) {
+        if ([photoId isEqualToString:[recentPhoto valueForKeyPath:FLICKR_PHOTO_ID]]) {
             found = YES;
             break;
         }
     }
-    if (!found) {
+    if (!found && self.photoDetails) {
         [recents insertObject:self.photoDetails atIndex:0];
     }
     
@@ -74,10 +71,20 @@
     [prefs synchronize];
 }
 
+- (void)setPhotoDetails:(NSDictionary *)photoDetails
+{
+    if (_photoDetails != photoDetails) {
+        _photoDetails = photoDetails;
+        [self addPhotoToRecents];
+        if (self.view.window) [self loadPhotoImage];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.scrollView.delegate = self;
+    [self loadPhotoImage];
 }
 
 - (void)viewDidUnload
@@ -85,13 +92,6 @@
     [self setScrollView:nil];
     [self setImageView:nil];
     [super viewDidUnload];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self loadPhoto];
-    [self addPhotoToRecents];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
