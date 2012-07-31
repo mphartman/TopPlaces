@@ -50,7 +50,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Top Places" id="xIC-z6-KDJ">
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="yHi-VL-muF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="yHi-VL-muF">
                             <connections>
                                 <action selector="refresh:" destination="g2w-lo-yPJ" id="e8v-pZ-RVP"/>
                             </connections>
@@ -269,7 +269,6 @@
         <class className="TopPlacesTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTableViewController.h"/>
             <relationships>
-                <relationship kind="action" name="refresh:"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
