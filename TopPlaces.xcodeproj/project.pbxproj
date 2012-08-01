@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490899E615C8BCBD005E9B11 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490899E515C8BCBD005E9B11 /* MapKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		4931722915BCD73D00E7B1D7 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4931722815BCD73D00E7B1D7 /* FlickrFetcher.m */; };
 		4997F04815BE399700AE6ADD /* TopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997F04715BE399700AE6ADD /* TopPlacesTableViewController.m */; };
 		49C0A8C915C22550001587C7 /* RecentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C0A8C815C22550001587C7 /* RecentsTableViewController.m */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		490899E515C8BCBD005E9B11 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4931722615BCD73D00E7B1D7 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrAPIKey.h; path = TopPlaces/Flickr/FlickrAPIKey.h; sourceTree = "<group>"; };
 		4931722715BCD73D00E7B1D7 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlickrFetcher.h; path = TopPlaces/Flickr/FlickrFetcher.h; sourceTree = "<group>"; };
 		4931722815BCD73D00E7B1D7 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlickrFetcher.m; path = TopPlaces/Flickr/FlickrFetcher.m; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				49C6CB1015B9E31000A03BB7 /* UIKit.framework in Frameworks */,
 				49C6CB1215B9E31000A03BB7 /* Foundation.framework in Frameworks */,
 				49C6CB1415B9E31000A03BB7 /* CoreGraphics.framework in Frameworks */,
+				490899E615C8BCBD005E9B11 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +78,7 @@
 		49C6CB0015B9E31000A03BB7 = {
 			isa = PBXGroup;
 			children = (
+				490899E515C8BCBD005E9B11 /* MapKit.framework */,
 				4931722515BCD6CE00E7B1D7 /* Flickr */,
 				49C6CB1515B9E31000A03BB7 /* TopPlaces */,
 				49C6CB0E15B9E31000A03BB7 /* Frameworks */,
