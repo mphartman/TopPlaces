@@ -50,6 +50,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Top Places" id="xIC-z6-KDJ">
+                        <barButtonItem key="leftBarButtonItem" title="Map" id="HLk-PX-CSg">
+                            <connections>
+                                <segue destination="lFI-Vl-3Vw" kind="push" identifier="Show Places on Map" id="bMK-20-ek3"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="yHi-VL-muF">
                             <connections>
                                 <action selector="refresh:" destination="g2w-lo-yPJ" id="e8v-pZ-RVP"/>
@@ -62,6 +67,30 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1075" y="-37"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="1yY-0v-yI6">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tUs-As-qd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="lFI-Vl-3Vw" customClass="MapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R3I-ay-Jx6">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="QYn-p4-pHj">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="h0M-l9-YGU"/>
+                    <connections>
+                        <outlet property="mapView" destination="QYn-p4-pHj" id="tdQ-gu-uuk"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1962" y="-640"/>
         </scene>
         <!--Photos Table View Controller - Photos-->
         <scene sceneID="43b-IC-cBZ">
@@ -215,7 +244,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TIe-pR-egy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="WrN-4D-eb9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostRecent" id="mlp-l6-voB"/>
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="mlp-l6-voB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pCg-cW-Nq8">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -247,6 +276,12 @@
         </scene>
     </scenes>
     <classes>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
         <class className="PhotoDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoDetailViewController.h"/>
             <relationships>
@@ -269,6 +304,7 @@
         <class className="TopPlacesTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="refresh:"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>

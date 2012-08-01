@@ -9,6 +9,8 @@
 #import "TopPlacesTableViewController.h"
 #import "FlickrFetcher.h"
 #import "PhotosTableViewController.h"
+#import "MapViewController.h"
+#import "FlickrPlaceAnnotation.h"
 
 @interface TopPlacesTableViewController ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -68,6 +70,15 @@
     }
 }
 
+- (NSArray *)mapAnnotations
+{
+    NSMutableArray *annotations = [NSMutableArray array];
+    for (NSDictionary *place in self.topPlaces) {
+        [annotations addObject:[FlickrPlaceAnnotation annotationForPlace:place]];
+    }
+    return annotations;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Photos of Place"]) {
@@ -77,6 +88,11 @@
         PhotosTableViewController *viewController = segue.destinationViewController;      
         viewController.title = cell.textLabel.text;
         viewController.flickrPlace = flickrPlace;
+    }
+    else if ([segue.identifier isEqualToString:@"Show Places on Map"]) {
+        MapViewController *viewController = segue.destinationViewController;
+        viewController.title = self.title;
+        viewController.annotations = [self mapAnnotations];
     }
 }
 
