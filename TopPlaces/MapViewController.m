@@ -7,6 +7,10 @@
 //
 
 #import "MapViewController.h"
+#import "PhotosTableViewController.h"
+#import "FlickrPlaceAnnotation.h"
+#import "PhotoDetailViewController.h"
+#import "FlickrPhotoAnnotation.h"
 
 @interface MapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -83,8 +87,11 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     if ([control isKindOfClass:[UIButton class]]) {
-        if ([self.delegate respondsToSelector:@selector(mapViewController:didSelectAnnotation:)]) {
-            [self.delegate mapViewController:self didSelectAnnotation:view.annotation];
+        if ([view.annotation isKindOfClass:[FlickrPlaceAnnotation class]]) {
+        [self performSegueWithIdentifier:@"Show Photos of Place" sender:view.annotation];
+        }
+        else if ([view.annotation isKindOfClass:[FlickrPhotoAnnotation class]]) {
+            [self performSegueWithIdentifier:@"Show Photo Detail" sender:view.annotation];
         }
     }
 }
@@ -114,4 +121,19 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Show Photos of Place"]) {
+        FlickrPlaceAnnotation *placeAnnotation = sender;
+        PhotosTableViewController *viewController = segue.destinationViewController;
+        viewController.title = placeAnnotation.title;
+        viewController.flickrPlace = placeAnnotation.place;
+    }
+    else if ([segue.identifier isEqualToString:@"Show Photo Detail"]) {
+        FlickrPhotoAnnotation *photoAnnotation = sender;
+        PhotoDetailViewController *viewController = segue.destinationViewController;
+        viewController.title = photoAnnotation.title;
+        viewController.photoDetails = photoAnnotation.photo;
+    }
+}
 @end

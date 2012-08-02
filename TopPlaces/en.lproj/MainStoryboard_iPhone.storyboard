@@ -63,7 +63,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ajm-Bk-90S" id="9T0-jf-hVS"/>
-                        <segue destination="TWr-n6-TcP" kind="push" identifier="Show Photos from Map" id="XTa-Fr-r6z"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -88,10 +87,36 @@
                     <navigationItem key="navigationItem" id="h0M-l9-YGU"/>
                     <connections>
                         <outlet property="mapView" destination="QYn-p4-pHj" id="tdQ-gu-uuk"/>
+                        <segue destination="TWr-n6-TcP" kind="push" identifier="Show Photos of Place" id="OiA-gR-qnz"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2192" y="-639"/>
+            <point key="canvasLocation" x="1683" y="-781"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="HX0-yr-wwH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K8b-cw-WgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="c0d-V0-kCh" customClass="MapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P9H-NK-UKA">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="qj2-yu-nZw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="buz-1x-pkZ"/>
+                    <connections>
+                        <outlet property="mapView" destination="qj2-yu-nZw" id="ZqO-jn-ywi"/>
+                        <segue destination="g27-gQ-zfq" kind="push" identifier="Show Photo Detail" id="ujc-OP-1dB"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2889" y="-762"/>
         </scene>
         <!--Photos Table View Controller - Photos-->
         <scene sceneID="43b-IC-cBZ">
@@ -140,17 +165,16 @@
                     <navigationItem key="navigationItem" title="Photos" id="Up7-Et-UGZ">
                         <barButtonItem key="rightBarButtonItem" title="Map" id="UuJ-H2-K5e">
                             <connections>
-                                <segue destination="lFI-Vl-3Vw" kind="push" identifier="Show Photos on Map" id="G1E-48-mAp"/>
+                                <segue destination="c0d-V0-kCh" kind="push" identifier="Show Photos on Map" id="W9U-tJ-Xql"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="EXG-YC-VRh" id="wbI-z5-Sdk"/>
-                        <segue destination="g27-gQ-zfq" kind="push" identifier="Show Photo Detail from Map" id="lTA-gs-riy"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1773" y="-37"/>
+            <point key="canvasLocation" x="2301" y="-37"/>
         </scene>
         <!--Photo Detail View Controller-->
         <scene sceneID="WGc-0h-iYD">
@@ -181,7 +205,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2366" y="-37"/>
+            <point key="canvasLocation" x="3490" y="-37"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EM8-hg-oWc">
@@ -323,8 +347,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="XTa-Fr-r6z"/>
-        <segue reference="bMK-20-ek3"/>
-        <segue reference="lTA-gs-riy"/>
+        <segue reference="OiA-gR-qnz"/>
+        <segue reference="ujc-OP-1dB"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -106,13 +106,6 @@
         viewController.title = self.title;
         viewController.annotations = [self mapAnnotations];
     }
-    else if ([segue.identifier isEqualToString:@"Show Photo Detail from Map"]) {
-        FlickrPhotoAnnotation *annotation = sender;
-        NSDictionary *photo = annotation.photo;
-        PhotoDetailViewController *viewController = segue.destinationViewController;
-        viewController.title = annotation.title;
-        viewController.photoDetails = photo;
-    }
 }
 
 #pragma mark - Table view data source
@@ -155,11 +148,6 @@
     NSURL *url = [FlickrFetcher urlForPhoto:photoAnnotation.photo format:FlickrPhotoFormatSquare];
     NSData *data = [NSData dataWithContentsOfURL:url];
     return data ? [UIImage imageWithData:data] : nil;
-}
-
-- (void)mapViewController:(MapViewController *)sender didSelectAnnotation:(id<MKAnnotation>)annotation
-{
-    [self performSegueWithIdentifier:@"Show Photo Detail from Map" sender:annotation];
 }
 
 @end
