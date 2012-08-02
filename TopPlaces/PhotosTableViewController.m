@@ -9,11 +9,13 @@
 #import "PhotosTableViewController.h"
 #import "FlickrFetcher.h"
 #import "PhotoDetailViewController.h"
+#import "MapViewController.h"
+#import "FlickrPhotoAnnotation.h"
 
 // Maximum number of Flickr photos to show for a given place
 #define MAX_PHOTOS 50
 
-@interface PhotosTableViewController ()
+@interface PhotosTableViewController () <MapViewControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *photos;  // array of NSDictionary describing Flickr photos
 @end
@@ -28,6 +30,7 @@
 {
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
+    UIBarButtonItem *rightBarButtonItem = self.navigationItem.rightBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr photos for place", NULL);
@@ -36,7 +39,7 @@
         NSArray *photos = [FlickrFetcher photosInPlace:self.flickrPlace maxResults:MAX_PHOTOS];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.photos = photos;
-            self.navigationItem.rightBarButtonItem = nil;
+            self.navigationItem.rightBarButtonItem = rightBarButtonItem;
         });
     });
 }
@@ -78,6 +81,15 @@
     }
 }
 
+- (NSArray *)mapAnnotations
+{
+    NSMutableArray *annotations = [NSMutableArray array];
+    for (NSDictionary *photo in self.photos) {
+        [annotations addObject:[FlickrPhotoAnnotation annotationForPhoto:photo]];
+    }
+    return annotations;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Photo Detail"]) {
@@ -86,6 +98,19 @@
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         PhotoDetailViewController *viewController = segue.destinationViewController;
         viewController.title = cell.textLabel.text;
+        viewController.photoDetails = photo;
+    }
+    else if ([segue.identifier isEqualToString:@"Show Photos on Map"]) {
+        MapViewController *viewController = segue.destinationViewController;
+        viewController.delegate = self;
+        viewController.title = self.title;
+        viewController.annotations = [self mapAnnotations];
+    }
+    else if ([segue.identifier isEqualToString:@"Show Photo Detail from Map"]) {
+        FlickrPhotoAnnotation *annotation = sender;
+        NSDictionary *photo = annotation.photo;
+        PhotoDetailViewController *viewController = segue.destinationViewController;
+        viewController.title = annotation.title;
         viewController.photoDetails = photo;
     }
 }
@@ -119,6 +144,22 @@
     cell.textLabel.text = title;
     cell.detailTextLabel.text = description;
     return cell;
+}
+
+#pragma mark - MapViewControllerDelegate
+
+- (UIImage *)mapViewController:(MapViewController *)sender imageForAnnotation:(id<MKAnnotation>)annotation
+{
+    FlickrPhotoAnnotation *photoAnnotation = annotation;
+    NSLog(@"Loading thumbnail photo %@ from Flickr...", [photoAnnotation.photo valueForKeyPath:FLICKR_PHOTO_ID]);
+    NSURL *url = [FlickrFetcher urlForPhoto:photoAnnotation.photo format:FlickrPhotoFormatSquare];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
+- (void)mapViewController:(MapViewController *)sender didSelectAnnotation:(id<MKAnnotation>)annotation
+{
+    [self performSegueWithIdentifier:@"Show Photo Detail from Map" sender:annotation];
 }
 
 @end

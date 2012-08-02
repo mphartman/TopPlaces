@@ -25,6 +25,7 @@
 {
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
+    UIBarButtonItem *rightBarButtonItem = self.navigationItem.rightBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("fetch flickr top places", NULL);
@@ -35,7 +36,7 @@
         NSArray *topPlaces = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:photoPlaceSortDescriptor]];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.topPlaces = topPlaces;
-            self.navigationItem.rightBarButtonItem = sender; // put Refresh button back
+            self.navigationItem.rightBarButtonItem = rightBarButtonItem; // put button back
         });
     });
     dispatch_release(downloadQueue);

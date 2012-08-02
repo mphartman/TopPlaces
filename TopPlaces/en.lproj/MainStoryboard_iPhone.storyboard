@@ -50,14 +50,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Top Places" id="xIC-z6-KDJ">
-                        <barButtonItem key="leftBarButtonItem" title="Map" id="HLk-PX-CSg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="4Vf-HU-MYX">
                             <connections>
-                                <segue destination="lFI-Vl-3Vw" kind="push" identifier="Show Places on Map" id="bMK-20-ek3"/>
+                                <action selector="refresh:" destination="g2w-lo-yPJ" id="Lnx-Yc-i8I"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="yHi-VL-muF">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="HLk-PX-CSg">
                             <connections>
-                                <action selector="refresh:" destination="g2w-lo-yPJ" id="e8v-pZ-RVP"/>
+                                <segue destination="lFI-Vl-3Vw" kind="push" identifier="Show Places on Map" id="bMK-20-ek3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -91,7 +91,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1962" y="-640"/>
+            <point key="canvasLocation" x="2192" y="-639"/>
         </scene>
         <!--Photos Table View Controller - Photos-->
         <scene sceneID="43b-IC-cBZ">
@@ -137,13 +137,20 @@
                             <outlet property="delegate" destination="TWr-n6-TcP" id="209-9o-jFm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Photos" id="Up7-Et-UGZ"/>
+                    <navigationItem key="navigationItem" title="Photos" id="Up7-Et-UGZ">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="UuJ-H2-K5e">
+                            <connections>
+                                <segue destination="lFI-Vl-3Vw" kind="push" identifier="Show Photos on Map" id="G1E-48-mAp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="EXG-YC-VRh" id="wbI-z5-Sdk"/>
+                        <segue destination="g27-gQ-zfq" kind="push" identifier="Show Photo Detail from Map" id="lTA-gs-riy"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1546" y="-37"/>
+            <point key="canvasLocation" x="1773" y="-37"/>
         </scene>
         <!--Photo Detail View Controller-->
         <scene sceneID="WGc-0h-iYD">
@@ -174,7 +181,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1962" y="-36"/>
+            <point key="canvasLocation" x="2366" y="-37"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EM8-hg-oWc">
@@ -276,6 +283,40 @@
             <point key="canvasLocation" x="-87" y="303"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="PhotoDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="PhotosTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RecentsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentsTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="TopPlacesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="refresh:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -283,5 +324,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="XTa-Fr-r6z"/>
+        <segue reference="bMK-20-ek3"/>
+        <segue reference="lTA-gs-riy"/>
     </inferredMetricsTieBreakers>
 </document>
