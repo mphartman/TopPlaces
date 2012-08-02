@@ -12,8 +12,14 @@
 @class MapViewController;
 
 @protocol MapViewControllerDelegate <NSObject>
+
+@optional
 - (UIImage *)mapViewController:(MapViewController *) sender
             imageForAnnotation:(id <MKAnnotation>) annotation;
+
+- (void)mapViewController:(MapViewController *)sender
+      didSelectAnnotation:(id <MKAnnotation>) annotation;
+
 @end
 
 @interface MapViewController : UIViewController <MKMapViewDelegate>

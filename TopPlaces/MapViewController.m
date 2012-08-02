@@ -45,9 +45,27 @@
     if (!view) {
         view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"TopPlaces.MapVC"];
         view.canShowCallout = YES;
+        view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     view.annotation = annotation;
     return view;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    if ([self.delegate respondsToSelector:@selector(mapViewController:imageForAnnotation:)]) {
+        UIImage *image = [self.delegate mapViewController:self imageForAnnotation:view.annotation];
+        [(UIImageView *)view.leftCalloutAccessoryView setImage:image];
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    if ([control isKindOfClass:[UIButton class]]) {
+        if ([self.delegate respondsToSelector:@selector(mapViewController:didSelectAnnotation:)]) {
+            [self.delegate mapViewController:self didSelectAnnotation:view.annotation];
+        }
+    }
 }
 
 #pragma mark - View Controller Lifecycle

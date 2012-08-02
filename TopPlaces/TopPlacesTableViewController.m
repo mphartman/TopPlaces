@@ -12,7 +12,7 @@
 #import "MapViewController.h"
 #import "FlickrPlaceAnnotation.h"
 
-@interface TopPlacesTableViewController ()
+@interface TopPlacesTableViewController () <MapViewControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @end
 
@@ -91,8 +91,16 @@
     }
     else if ([segue.identifier isEqualToString:@"Show Places on Map"]) {
         MapViewController *viewController = segue.destinationViewController;
+        viewController.delegate = self;
         viewController.title = self.title;
         viewController.annotations = [self mapAnnotations];
+    }
+    else if ([segue.identifier isEqualToString:@"Show Photos from Map"]) {
+        FlickrPlaceAnnotation *placeAnnotation = sender;
+        NSDictionary *flickrPlace = placeAnnotation.place;
+        PhotosTableViewController *viewController = segue.destinationViewController;
+        viewController.title = placeAnnotation.title;
+        viewController.flickrPlace = flickrPlace;
     }
 }
 
@@ -126,6 +134,14 @@
     }
     
     return cell;
+}
+
+#pragma mark - MapViewControllerDelegate
+
+- (void)mapViewController:(MapViewController *)sender
+      didSelectAnnotation:(id<MKAnnotation>)annotation
+{
+    [self performSegueWithIdentifier:@"Show Photos from Map" sender:annotation];
 }
 
 @end
