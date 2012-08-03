@@ -8,10 +8,12 @@
 
 #import "PhotoDetailViewController.h"
 #import "FlickrFetcher.h"
+#import "ImageCache.h"
 
 @interface PhotoDetailViewController () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) ImageCache *imageCache;
 @end
 
 @implementation PhotoDetailViewController
@@ -19,19 +21,36 @@
 @synthesize scrollView = _scrollView;
 @synthesize imageView = _imageView;
 @synthesize photoDetails = _photoDetails;
+@synthesize imageCache = _imageCache;
+
+- (ImageCache *)imageCache
+{
+    if (!_imageCache) _imageCache = [[ImageCache alloc] init];
+    return _imageCache;
+}
 
 - (void)loadPhotoImage
 {
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
+    UIBarButtonItem *rightBarButtonItem = self.navigationItem.rightBarButtonItem;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image download", NULL);
     dispatch_async(downloadQueue, ^{
-        NSLog(@"Loading photo %@ from Flickr...", [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID]);
-        NSURL *photoURL = [FlickrFetcher urlForPhoto:self.photoDetails format:FlickrPhotoFormatLarge];
-        NSData *bits = [NSData dataWithContentsOfURL:photoURL];
+        
+        NSString *photoId = [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID];
+        
+        NSData *bits = [self.imageCache dataFromCacheForKey:photoId];
+        if (!bits) {
+            NSLog(@"Loading photo %@ from Flickr...", photoId);
+            NSURL *photoURL = [FlickrFetcher urlForPhoto:self.photoDetails format:FlickrPhotoFormatLarge];
+            bits = [NSData dataWithContentsOfURL:photoURL];
+            [self.imageCache addDataToCache:bits forKey:photoId];
+        }
+        
         UIImage *image = [UIImage imageWithData:bits];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imageView.image = image;
             self.scrollView.contentSize = self.imageView.image.size;
@@ -41,7 +60,7 @@
             CGFloat heightRatio = self.scrollView.bounds.size.height / image.size.height;
             CGFloat ratio = MAX(widthRatio, heightRatio);
             [self.scrollView setZoomScale:ratio animated:NO];
-            self.navigationItem.rightBarButtonItem = nil;
+            self.navigationItem.rightBarButtonItem = rightBarButtonItem;
         });
     });
 }
