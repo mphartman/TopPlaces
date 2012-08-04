@@ -10,6 +10,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1Z-du-e5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="NDt-s5-Gob" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="ApC-nj-Eol"/>
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="pkw-UB-D8r">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -18,7 +19,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="692" y="-573"/>
+            <point key="canvasLocation" x="1922" y="-573"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="HSX-cK-pa3">
@@ -27,8 +28,8 @@
                 <splitViewController id="QAl-iU-jhN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
-                        <segue destination="NDt-s5-Gob" kind="relationship" relationship="masterViewController" id="9VE-Xn-y9G"/>
                         <segue destination="CBI-p2-Lxd" kind="relationship" relationship="detailViewController" id="BN5-Lf-AiF"/>
+                        <segue destination="8Va-9X-9rG" kind="relationship" relationship="masterViewController" id="Hrh-XL-fLZ"/>
                     </connections>
                 </splitViewController>
             </objects>
@@ -40,7 +41,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9VT-6I-tb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="8Kp-cH-WoF" customClass="TopPlacesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="MOJ-eR-A0a">
-                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -91,7 +92,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1279" y="-573"/>
+            <point key="canvasLocation" x="2509" y="-573"/>
         </scene>
         <!--Map View Controller - Top Places-->
         <scene sceneID="Xhk-XB-4av">
@@ -171,7 +172,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2753" y="-581"/>
+            <point key="canvasLocation" x="3983" y="-581"/>
         </scene>
         <!--Photo Detail View Controller - Image-->
         <scene sceneID="aLy-KG-2E3">
@@ -224,6 +225,88 @@
             </objects>
             <point key="canvasLocation" x="723" y="463"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Chz-M5-3Ay">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iFR-rw-Gmi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tabBarController id="8Va-9X-9rG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="RcU-HN-McU">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="NDt-s5-Gob" kind="relationship" relationship="viewControllers" id="pNg-s3-TMA"/>
+                        <segue destination="UHi-Ib-R0A" kind="relationship" relationship="viewControllers" id="sCo-fb-MBx"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="792" y="-1003"/>
+        </scene>
+        <!--Recents Table View Controller - Recent Photos-->
+        <scene sceneID="KNC-Tl-t1k">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WTK-nK-d4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="a45-Zc-rBB" customClass="RecentsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="el9-iW-1lM">
+                        <rect key="frame" x="0.0" y="64" width="320" height="739"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recent Photo Description" textLabel="NyX-oI-WSX" detailTextLabel="HT6-av-Gch" style="IBUITableViewCellStyleSubtitle" id="YpW-rC-2l8">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NyX-oI-WSX">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HT6-av-Gch">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Recent Photos" id="eWO-FY-dF5"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <connections>
+                        <outlet property="tableView" destination="el9-iW-1lM" id="DSt-2j-gux"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="2509" y="-1599"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fiF-mT-jsj">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MvE-cl-Rc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="UHi-Ib-R0A" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="edb-9p-tZi"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tac-h7-s5w">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="a45-Zc-rBB" kind="relationship" relationship="rootViewController" id="pe9-1d-wA9"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1908" y="-1604"/>
+        </scene>
     </scenes>
     <classes>
         <class className="MapViewController" superclassName="UIViewController">
@@ -246,10 +329,15 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
+        <class className="RecentsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentsTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="TopPlacesTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTableViewController.h"/>
             <relationships>
-                <relationship kind="action" name="refresh:"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
