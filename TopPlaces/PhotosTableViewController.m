@@ -63,6 +63,12 @@
     if (_photos != photos) {
         _photos = photos;
         if (self.view.window) [self.tableView reloadData];
+        if (self.splitViewController) {
+            UINavigationController *nvc = [self.splitViewController.viewControllers lastObject];
+            MapViewController *vc = [nvc.viewControllers objectAtIndex:0];
+            vc.title = self.title;
+            vc.annotations = [self mapAnnotations];
+        }
     }
 }
 

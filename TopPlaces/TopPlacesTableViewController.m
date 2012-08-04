@@ -47,8 +47,15 @@
     if (_topPlaces != topPlaces) {
         _topPlaces = topPlaces;
         if (self.view.window) [self.tableView reloadData];
+        if (self.splitViewController) {
+            UINavigationController *nvc = [self.splitViewController.viewControllers lastObject];
+            MapViewController *vc = [nvc.viewControllers objectAtIndex:0];
+            vc.annotations = [self mapAnnotations];
+        }
     }
 }
+
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
@@ -56,11 +63,24 @@
     [self refresh:self.navigationItem.rightBarButtonItem];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.splitViewController) {
+        UINavigationController *nvc = [self.splitViewController.viewControllers lastObject];
+        [nvc popToRootViewControllerAnimated:YES];
+        MapViewController *mapVC = [nvc.viewControllers objectAtIndex:0];
+        mapVC.annotations = [self mapAnnotations];
+    }
+}
+
 - (void)viewDidUnload
 {
     [self setTableView:nil];
     [super viewDidUnload];
 }
+
+#pragma mark - Auto Rotation
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

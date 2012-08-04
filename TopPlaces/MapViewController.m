@@ -12,13 +12,17 @@
 #import "PhotoDetailViewController.h"
 #import "FlickrPhotoAnnotation.h"
 
-@interface MapViewController ()
+@interface MapViewController () <UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, weak) UIBarButtonItem *splitViewBarButtonItem;
 @end
 
 @implementation MapViewController
 
 @synthesize mapView = _mapView;
+@synthesize toolbar = _toolbar;
+@synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 @synthesize annotations = _annotations;
 @synthesize delegate = _delegate;
 
@@ -54,6 +58,17 @@
     [self updateMapView];
 }
 
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
+        NSMutableArray *toolbarItems = [self.navigationController.toolbar.items mutableCopy];
+        if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
+        if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+        self.navigationController.toolbar.items = toolbarItems;
+        _splitViewBarButtonItem = splitViewBarButtonItem;
+    }
+}
+
 #pragma mark - MKMapViewDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView
@@ -81,6 +96,7 @@
                 [(UIImageView *)view.leftCalloutAccessoryView setImage:image];
             });
         });
+        dispatch_release(aQueue);
     }
 }
 
@@ -88,11 +104,12 @@
 {
     if ([control isKindOfClass:[UIButton class]]) {
         if ([view.annotation isKindOfClass:[FlickrPlaceAnnotation class]]) {
-        [self performSegueWithIdentifier:@"Show Photos of Place" sender:view.annotation];
+            [self performSegueWithIdentifier:@"Show Photos of Place" sender:view.annotation];
         }
         else if ([view.annotation isKindOfClass:[FlickrPhotoAnnotation class]]) {
             [self performSegueWithIdentifier:@"Show Photo Detail" sender:view.annotation];
         }
+        
     }
 }
 
@@ -102,6 +119,7 @@
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
+    self.splitViewController.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -136,4 +154,31 @@
         viewController.photoDetails = photoAnnotation.photo;
     }
 }
+
+#pragma mark - UISplitViewControllerDelegate
+
+- (BOOL)splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation
+{
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+- (void)splitViewController:(UISplitViewController *)svc
+     willHideViewController:(UIViewController *)aViewController
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem
+       forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = @"Top Places";
+    NSLog(@"%@", barButtonItem);
+    self.splitViewBarButtonItem = barButtonItem;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc
+     willShowViewController:(UIViewController *)aViewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    self.splitViewBarButtonItem = nil;
+}
+
 @end
