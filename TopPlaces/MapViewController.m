@@ -61,10 +61,7 @@
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
     if (splitViewBarButtonItem != _splitViewBarButtonItem) {
-        NSMutableArray *toolbarItems = [self.navigationController.toolbar.items mutableCopy];
-        if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
-        if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-        self.navigationController.toolbar.items = toolbarItems;
+        self.navigationItem.leftBarButtonItem = splitViewBarButtonItem;
         _splitViewBarButtonItem = splitViewBarButtonItem;
     }
 }
@@ -114,6 +111,12 @@
 }
 
 #pragma mark - View Controller Lifecycle
+
+- (void) awakeFromNib
+{
+    [super awakeFromNib];
+    self.splitViewController.delegate = self;
+}
 
 - (void)viewDidLoad
 {
@@ -169,8 +172,8 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
-    barButtonItem.title = @"Top Places";
-    NSLog(@"%@", barButtonItem);
+    barButtonItem.title = [[[[(UINavigationController *)aViewController viewControllers] objectAtIndex:0] navigationItem] title];
+    if (!barButtonItem.title) barButtonItem.title = @"Top Places";
     self.splitViewBarButtonItem = barButtonItem;
 }
 
