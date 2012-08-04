@@ -63,6 +63,7 @@
             self.navigationItem.rightBarButtonItem = rightBarButtonItem;
         });
     });
+    dispatch_release(downloadQueue);
 }
 
 - (void)addPhotoToRecents
