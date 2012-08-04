@@ -115,7 +115,7 @@
                     <connections>
                         <outlet property="mapView" destination="xjS-Mw-bCa" id="iPM-Uk-P2V"/>
                         <segue destination="ejB-TJ-T4Y" kind="push" identifier="Show Photo Detail" id="dy5-1N-XyZ"/>
-                        <segue destination="WGe-Xp-5SQ" kind="push" identifier="Show Photos of Place" splitViewControllerTargetIndex="0" id="uXs-sV-j3l"/>
+                        <segue destination="WGe-Xp-5SQ" kind="push" identifier="Show Photos of Place" splitViewControllerTargetIndex="0" id="5uk-Cn-hIi"/>
                     </connections>
                 </viewController>
             </objects>
@@ -172,7 +172,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="3983" y="-581"/>
+            <point key="canvasLocation" x="3455" y="-585"/>
         </scene>
         <!--Photo Detail View Controller - Image-->
         <scene sceneID="aLy-KG-2E3">
@@ -204,7 +204,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3336" y="471"/>
+            <point key="canvasLocation" x="4500" y="463"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="m63-Ym-dI6">
@@ -348,7 +348,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uXs-sV-j3l"/>
         <segue reference="dy5-1N-XyZ"/>
+        <segue reference="5uk-Cn-hIi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -101,7 +101,7 @@
 {
     if ([control isKindOfClass:[UIButton class]]) {
         if ([view.annotation isKindOfClass:[FlickrPlaceAnnotation class]]) {
-            [self performSegueWithIdentifier:@"Show Photos of Place" sender:view.annotation];
+            //[self performSegueWithIdentifier:@"Show Photos of Place" sender:view.annotation];
         }
         else if ([view.annotation isKindOfClass:[FlickrPhotoAnnotation class]]) {
             [self performSegueWithIdentifier:@"Show Photo Detail" sender:view.annotation];
