@@ -14,14 +14,12 @@
 
 @interface MapViewController () <UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, weak) UIBarButtonItem *splitViewBarButtonItem;
 @end
 
 @implementation MapViewController
 
 @synthesize mapView = _mapView;
-@synthesize toolbar = _toolbar;
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 @synthesize annotations = _annotations;
 @synthesize delegate = _delegate;
@@ -101,7 +99,12 @@
 {
     if ([control isKindOfClass:[UIButton class]]) {
         if ([view.annotation isKindOfClass:[FlickrPlaceAnnotation class]]) {
-            //[self performSegueWithIdentifier:@"Show Photos of Place" sender:view.annotation];
+            if (self.splitViewController) {
+                
+            }
+            else {
+                [self performSegueWithIdentifier:@"Show Photos of Place" sender:view.annotation];
+            }
         }
         else if ([view.annotation isKindOfClass:[FlickrPhotoAnnotation class]]) {
             [self performSegueWithIdentifier:@"Show Photo Detail" sender:view.annotation];
