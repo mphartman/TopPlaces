@@ -27,6 +27,7 @@
 		49C6CB2615B9E31000A03BB7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C6CB2415B9E31000A03BB7 /* MainStoryboard_iPad.storyboard */; };
 		49CC438F15BF720A00D713A6 /* PhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */; };
 		49CC439715BF880A00D713A6 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CC439615BF880A00D713A6 /* PhotoDetailViewController.m */; };
+		49F4CE8115D355830021C6B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F4CE8015D355830021C6B1 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosTableViewController.m; sourceTree = "<group>"; };
 		49CC439515BF880A00D713A6 /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
 		49CC439615BF880A00D713A6 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
+		49F4CE8015D355830021C6B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				49C6CB1415B9E31000A03BB7 /* CoreGraphics.framework in Frameworks */,
 				490899F015C8C42B005E9B11 /* CoreLocation.framework in Frameworks */,
 				490899E615C8BCBD005E9B11 /* MapKit.framework in Frameworks */,
+				49F4CE8115D355830021C6B1 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +117,7 @@
 		49C6CB0E15B9E31000A03BB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49F4CE8015D355830021C6B1 /* CoreData.framework */,
 				490899EF15C8C42B005E9B11 /* CoreLocation.framework */,
 				490899E515C8BCBD005E9B11 /* MapKit.framework */,
 				49C6CB0F15B9E31000A03BB7 /* UIKit.framework */,
