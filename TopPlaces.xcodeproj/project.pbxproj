@@ -27,6 +27,12 @@
 		49C6CB2615B9E31000A03BB7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C6CB2415B9E31000A03BB7 /* MainStoryboard_iPad.storyboard */; };
 		49CC438F15BF720A00D713A6 /* PhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */; };
 		49CC439715BF880A00D713A6 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CC439615BF880A00D713A6 /* PhotoDetailViewController.m */; };
+		49E2F1B615D73E12005CE2F3 /* VacationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1B515D73E12005CE2F3 /* VacationHelper.m */; };
+		49E2F1C215D7439E005CE2F3 /* VirtualVacation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1C015D7439E005CE2F3 /* VirtualVacation.xcdatamodeld */; };
+		49E2F1C515D74444005CE2F3 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1C415D74444005CE2F3 /* Place.m */; };
+		49E2F1C815D74444005CE2F3 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1C715D74444005CE2F3 /* Photo.m */; };
+		49E2F1CB15D74444005CE2F3 /* SearchTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1CA15D74444005CE2F3 /* SearchTag.m */; };
+		49E2F1CE15D744DB005CE2F3 /* Photo+Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1CD15D744DB005CE2F3 /* Photo+Flickr.m */; };
 		49F4CE8115D355830021C6B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F4CE8015D355830021C6B1 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +72,17 @@
 		49CC438E15BF720A00D713A6 /* PhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosTableViewController.m; sourceTree = "<group>"; };
 		49CC439515BF880A00D713A6 /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
 		49CC439615BF880A00D713A6 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
+		49E2F1B415D73E12005CE2F3 /* VacationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VacationHelper.h; sourceTree = "<group>"; };
+		49E2F1B515D73E12005CE2F3 /* VacationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VacationHelper.m; sourceTree = "<group>"; };
+		49E2F1C115D7439E005CE2F3 /* VirtualVacation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualVacation.xcdatamodel; sourceTree = "<group>"; };
+		49E2F1C315D74444005CE2F3 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		49E2F1C415D74444005CE2F3 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		49E2F1C615D74444005CE2F3 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		49E2F1C715D74444005CE2F3 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		49E2F1C915D74444005CE2F3 /* SearchTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTag.h; sourceTree = "<group>"; };
+		49E2F1CA15D74444005CE2F3 /* SearchTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTag.m; sourceTree = "<group>"; };
+		49E2F1CC15D744DB005CE2F3 /* Photo+Flickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Flickr.h"; sourceTree = "<group>"; };
+		49E2F1CD15D744DB005CE2F3 /* Photo+Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Flickr.m"; sourceTree = "<group>"; };
 		49F4CE8015D355830021C6B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -171,6 +188,17 @@
 		49E3F0E715D49CA300ADC8B0 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				49E2F1C015D7439E005CE2F3 /* VirtualVacation.xcdatamodeld */,
+				49E2F1C915D74444005CE2F3 /* SearchTag.h */,
+				49E2F1CA15D74444005CE2F3 /* SearchTag.m */,
+				49E2F1C615D74444005CE2F3 /* Photo.h */,
+				49E2F1CC15D744DB005CE2F3 /* Photo+Flickr.h */,
+				49E2F1CD15D744DB005CE2F3 /* Photo+Flickr.m */,
+				49E2F1C715D74444005CE2F3 /* Photo.m */,
+				49E2F1C315D74444005CE2F3 /* Place.h */,
+				49E2F1C415D74444005CE2F3 /* Place.m */,
+				49E2F1B415D73E12005CE2F3 /* VacationHelper.h */,
+				49E2F1B515D73E12005CE2F3 /* VacationHelper.m */,
 				490D42D715D345C500CEE6F0 /* CoreDataTableViewController.h */,
 				490D42D815D345C500CEE6F0 /* CoreDataTableViewController.m */,
 			);
@@ -254,6 +282,12 @@
 				490899F915CB1D76005E9B11 /* FlickrPhotoAnnotation.m in Sources */,
 				49089A0115CC49BC005E9B11 /* ImageCache.m in Sources */,
 				490D42D915D345C500CEE6F0 /* CoreDataTableViewController.m in Sources */,
+				49E2F1B615D73E12005CE2F3 /* VacationHelper.m in Sources */,
+				49E2F1C215D7439E005CE2F3 /* VirtualVacation.xcdatamodeld in Sources */,
+				49E2F1C515D74444005CE2F3 /* Place.m in Sources */,
+				49E2F1C815D74444005CE2F3 /* Photo.m in Sources */,
+				49E2F1CB15D74444005CE2F3 /* SearchTag.m in Sources */,
+				49E2F1CE15D744DB005CE2F3 /* Photo+Flickr.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +412,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		49E2F1C015D7439E005CE2F3 /* VirtualVacation.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				49E2F1C115D7439E005CE2F3 /* VirtualVacation.xcdatamodel */,
+			);
+			currentVersion = 49E2F1C115D7439E005CE2F3 /* VirtualVacation.xcdatamodel */;
+			path = VirtualVacation.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 49C6CB0215B9E31000A03BB7 /* Project object */;
 }
