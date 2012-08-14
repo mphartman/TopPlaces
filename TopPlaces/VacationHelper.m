@@ -10,6 +10,29 @@
 
 @implementation VacationHelper
 
++ (NSArray *)vacationNameList
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSURL *url = [[fileManager URLsForDirectory:NSDocumentDirectory
+                                      inDomains:NSUserDomainMask] lastObject];
+    
+    NSArray * files = [fileManager contentsOfDirectoryAtURL:url
+                                 includingPropertiesForKeys:[NSArray arrayWithObject:NSURLNameKey]
+                                                    options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                      error:nil];
+
+    NSMutableArray *names = [NSMutableArray array];
+    for (NSURL *file in files) {
+        NSString *name;
+        [file getResourceValue:&name forKey:NSURLNameKey error:nil];
+        [names addObject:name];
+    }
+    
+    return names;
+    
+}
+
 + (void)openVacation:(NSString *)vacationName
           usingBlock:(completion_block_t)completionBlock;
 {

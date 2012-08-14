@@ -33,6 +33,7 @@
 		49E2F1C815D74444005CE2F3 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1C715D74444005CE2F3 /* Photo.m */; };
 		49E2F1CB15D74444005CE2F3 /* SearchTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1CA15D74444005CE2F3 /* SearchTag.m */; };
 		49E2F1CE15D744DB005CE2F3 /* Photo+Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1CD15D744DB005CE2F3 /* Photo+Flickr.m */; };
+		49E2F1D515D85FBA005CE2F3 /* VacationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1D415D85FBA005CE2F3 /* VacationsTableViewController.m */; };
 		49F4CE8115D355830021C6B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F4CE8015D355830021C6B1 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,8 @@
 		49E2F1CA15D74444005CE2F3 /* SearchTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTag.m; sourceTree = "<group>"; };
 		49E2F1CC15D744DB005CE2F3 /* Photo+Flickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Flickr.h"; sourceTree = "<group>"; };
 		49E2F1CD15D744DB005CE2F3 /* Photo+Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Flickr.m"; sourceTree = "<group>"; };
+		49E2F1D315D85FBA005CE2F3 /* VacationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VacationsTableViewController.h; sourceTree = "<group>"; };
+		49E2F1D415D85FBA005CE2F3 /* VacationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VacationsTableViewController.m; sourceTree = "<group>"; };
 		49F4CE8015D355830021C6B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -165,6 +168,8 @@
 				490899F815CB1D76005E9B11 /* FlickrPhotoAnnotation.m */,
 				490899E815C8BD41005E9B11 /* MapViewController.h */,
 				490899E915C8BD41005E9B11 /* MapViewController.m */,
+				49E2F1D315D85FBA005CE2F3 /* VacationsTableViewController.h */,
+				49E2F1D415D85FBA005CE2F3 /* VacationsTableViewController.m */,
 				49E3F0E715D49CA300ADC8B0 /* Core Data */,
 				4931722515BCD6CE00E7B1D7 /* Flickr */,
 				49C6CB1615B9E31000A03BB7 /* Supporting Files */,
@@ -288,6 +293,7 @@
 				49E2F1C815D74444005CE2F3 /* Photo.m in Sources */,
 				49E2F1CB15D74444005CE2F3 /* SearchTag.m in Sources */,
 				49E2F1CE15D744DB005CE2F3 /* Photo+Flickr.m in Sources */,
+				49E2F1D515D85FBA005CE2F3 /* VacationsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
