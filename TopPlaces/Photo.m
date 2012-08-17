@@ -12,6 +12,7 @@
 
 @implementation Photo
 
+@dynamic unique;
 @dynamic title;
 @dynamic imageURL;
 @dynamic whereTaken;

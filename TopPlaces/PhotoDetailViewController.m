@@ -31,15 +31,14 @@
 
 - (void)loadPhotoImage
 {
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner startAnimating];
-    UIBarButtonItem *rightBarButtonItem = self.navigationItem.rightBarButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    NSLog(@"Loading photo %@", [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID]);
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image download", NULL);
     dispatch_async(downloadQueue, ^{
         
         NSString *photoId = [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID];
+        
+        //[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
         
         NSData *bits = [self.imageCache dataFromCacheForKey:photoId];
         if (!bits) {
@@ -60,7 +59,6 @@
             CGFloat heightRatio = self.scrollView.bounds.size.height / image.size.height;
             CGFloat ratio = MAX(widthRatio, heightRatio);
             [self.scrollView setZoomScale:ratio animated:NO];
-            self.navigationItem.rightBarButtonItem = rightBarButtonItem;
         });
     });
     dispatch_release(downloadQueue);
@@ -104,7 +102,12 @@
 {
     [super viewDidLoad];
     self.scrollView.delegate = self;
-    [self loadPhotoImage];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.photoDetails) [self loadPhotoImage];
 }
 
 - (void)viewDidUnload

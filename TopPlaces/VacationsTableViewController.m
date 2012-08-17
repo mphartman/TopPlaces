@@ -8,6 +8,7 @@
 
 #import "VacationsTableViewController.h"
 #import "VacationHelper.h"
+#import "VacationViewController.h"
 
 @interface VacationsTableViewController ()
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
@@ -21,7 +22,16 @@
 - (void)setVacations:(NSArray *)vacations
 {
     _vacations = vacations;
-    if (self.view.window) [self.tableView reloadData];
+    [self.tableView reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController respondsToSelector:@selector(setVacation:)]) {
+        NSString *vacationName = [self.vacations objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        [segue.destinationViewController setTitle:vacationName];
+        [segue.destinationViewController performSelector:@selector(setVacation:) withObject:vacationName];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -29,9 +39,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.vacations) {
-        self.vacations = [VacationHelper vacationNameList];
-    }
+    self.vacations = [VacationHelper vacationNameList];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.tableView.delegate = self;
 }
 
 - (void)viewDidUnload

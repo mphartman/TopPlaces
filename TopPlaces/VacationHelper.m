@@ -36,26 +36,41 @@
 + (void)openVacation:(NSString *)vacationName
           usingBlock:(completion_block_t)completionBlock;
 {
-    NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    url = [url URLByAppendingPathComponent:vacationName];
-    // url is now "<Documents Directory>/<vacationName>"
-    UIManagedDocument *vacationDatabase = [[UIManagedDocument alloc] initWithFileURL:url];
+    static NSMutableDictionary *vacationsByName = nil;
+    if (!vacationsByName) vacationsByName = [[NSMutableDictionary alloc] init];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[vacationDatabase.fileURL path]]) {
-        // does not exist on disk, so create it
-        [vacationDatabase saveToURL:vacationDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            if (completionBlock) completionBlock(vacationDatabase);
-        }];
+    UIManagedDocument *vacationDatabase = [vacationsByName objectForKey:vacationName];
+    if (vacationDatabase) {
+        completionBlock(vacationDatabase);
     }
-    else if (vacationDatabase.documentState == UIDocumentStateClosed) {
-        // exists on disk, but we need to open it
-        [vacationDatabase openWithCompletionHandler:^(BOOL success) {
+    else {
+    
+        NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+        url = [url URLByAppendingPathComponent:vacationName];
+        // url is now "<Documents Directory>/<vacationName>"
+        UIManagedDocument *vacationDatabase = [[UIManagedDocument alloc] initWithFileURL:url];
+        [vacationsByName setObject:vacationDatabase forKey:vacationName];
+        
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[vacationDatabase.fileURL path]]) {
+            // does not exist on disk, so create it
+            [vacationDatabase saveToURL:vacationDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+                NSLog(@"Creating %@", vacationName);
+                if (completionBlock) completionBlock(vacationDatabase);
+            }];
+        }
+        else if (vacationDatabase.documentState == UIDocumentStateClosed) {
+            // exists on disk, but we need to open it
+            [vacationDatabase openWithCompletionHandler:^(BOOL success) {
+                NSLog(@"Opening %@", vacationName);
+                if (completionBlock) completionBlock(vacationDatabase);
+            }];
+        }
+        else if (vacationDatabase.documentState == UIDocumentStateNormal) {
+            // already open and ready to use
+            NSLog(@"Already opened %@", vacationName);
             if (completionBlock) completionBlock(vacationDatabase);
-        }];
-    }
-    else if (vacationDatabase.documentState == UIDocumentStateNormal) {
-        // already open and ready to use
-        if (completionBlock) completionBlock(vacationDatabase);
+        }
+        
     }
 }
 

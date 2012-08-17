@@ -13,6 +13,7 @@
 
 @interface Photo : NSManagedObject
 
+@property (nonatomic, retain) NSString * unique;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * imageURL;
 @property (nonatomic, retain) Place *whereTaken;
