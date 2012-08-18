@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) ImageCache *imageCache;
-@property (strong, nonatomic) NSString *photoId;
 @end
 
 @implementation PhotoDetailViewController
@@ -29,29 +28,36 @@
     return _imageCache;
 }
 
-- (void)loadPhotoImage
+- (void)setImage:(NSData *)bits
 {
-    NSLog(@"Loading Photo ID: %@", self.photoId);
+    UIImage *image = [UIImage imageWithData:bits];
+    self.imageView.image = image;
+    self.scrollView.contentSize = self.imageView.image.size;
+    self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
+    // zoom image to make "best fit"
+    CGFloat widthRatio = self.scrollView.bounds.size.width / image.size.width;
+    CGFloat heightRatio = self.scrollView.bounds.size.height / image.size.height;
+    CGFloat ratio = MAX(widthRatio, heightRatio);
+    [self.scrollView setZoomScale:ratio animated:NO];
+}
+
+- (void)loadImageFromURL:(NSURL *)photoURL
+{
+    NSString *photoId = [NSString stringWithFormat:@"%d", [photoURL hash]];
+    NSLog(@"Loading Photo ID: %@", photoId);
+    
     dispatch_queue_t downloadQueue = dispatch_queue_create("image fetcher", NULL);
     dispatch_async(downloadQueue, ^{
         
-        NSData *bits = [self.imageCache dataFromCacheForKey:self.photoId];
+        NSData *bits = [self.imageCache dataFromCacheForKey:photoId];
         if (!bits) {
-            NSLog(@"Fetching data from URL %@", self.imageURL);
-            bits = [NSData dataWithContentsOfURL:self.imageURL];
-            [self.imageCache addDataToCache:bits forKey:self.photoId];
+            NSLog(@"Fetching data from URL %@", photoURL);
+            bits = [NSData dataWithContentsOfURL:photoURL];
+            [self.imageCache addDataToCache:bits forKey:photoId];
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIImage *image = [UIImage imageWithData:bits];
-            self.imageView.image = image;
-            self.scrollView.contentSize = self.imageView.image.size;
-            self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
-            // zoom image to make "best fit"
-            CGFloat widthRatio = self.scrollView.bounds.size.width / image.size.width;
-            CGFloat heightRatio = self.scrollView.bounds.size.height / image.size.height;
-            CGFloat ratio = MAX(widthRatio, heightRatio);
-            [self.scrollView setZoomScale:ratio animated:NO];
+            [self setImage:bits];
         });
         
     });
@@ -62,8 +68,7 @@
 {
     if (_imageURL != imageURL) {
         _imageURL = imageURL;
-        self.photoId = [NSString stringWithFormat:@"%d", [self.imageURL hash]];
-        if (self.imageView.window) [self loadPhotoImage];
+        [self loadImageFromURL:self.imageURL];
     }
 }
 
@@ -71,12 +76,6 @@
 {
     [super viewDidLoad];
     self.scrollView.delegate = self;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    //if (self.imageURL) [self loadPhotoImage];
 }
 
 - (void)viewDidUnload
