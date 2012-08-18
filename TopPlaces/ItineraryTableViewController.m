@@ -6,16 +6,16 @@
 //  Copyright (c) 2012 Piwiggi. All rights reserved.
 //
 
-#import "ItineraryViewController.h"
+#import "ItineraryTableViewController.h"
 #import "Place.h"
 #import "VacationHelper.h"
 #import "CoreDataPhotosTableViewController.h"
 
-@interface ItineraryViewController ()
+@interface ItineraryTableViewController ()
 @property (nonatomic, strong) UIManagedDocument *vacationDatabase;
 @end
 
-@implementation ItineraryViewController
+@implementation ItineraryTableViewController
 
 @synthesize vacation = _vacation;
 @synthesize vacationDatabase = _vacationDatabase;

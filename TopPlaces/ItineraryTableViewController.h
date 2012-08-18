@@ -8,7 +8,7 @@
 
 #import "CoreDataTableViewController.h"
 
-@interface ItineraryViewController : CoreDataTableViewController
+@interface ItineraryTableViewController : CoreDataTableViewController
 
 @property (nonatomic, strong) NSString *vacation; // name of vacation
 
