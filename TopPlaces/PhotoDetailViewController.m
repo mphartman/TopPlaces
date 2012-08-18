@@ -7,21 +7,21 @@
 //
 
 #import "PhotoDetailViewController.h"
-#import "FlickrFetcher.h"
 #import "ImageCache.h"
 
 @interface PhotoDetailViewController () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) ImageCache *imageCache;
+@property (strong, nonatomic) NSString *photoId;
 @end
 
 @implementation PhotoDetailViewController
 
 @synthesize scrollView = _scrollView;
 @synthesize imageView = _imageView;
-@synthesize photoDetails = _photoDetails;
 @synthesize imageCache = _imageCache;
+@synthesize imageURL = _imageURL;
 
 - (ImageCache *)imageCache
 {
@@ -31,26 +31,18 @@
 
 - (void)loadPhotoImage
 {
-    NSLog(@"Loading photo %@", [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID]);
-    
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image download", NULL);
     dispatch_async(downloadQueue, ^{
         
-        NSString *photoId = [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID];
-        
-        //[NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
-        
-        NSData *bits = [self.imageCache dataFromCacheForKey:photoId];
+        NSData *bits = [self.imageCache dataFromCacheForKey:self.photoId];
         if (!bits) {
-            NSLog(@"Loading photo %@ from Flickr...", photoId);
-            NSURL *photoURL = [FlickrFetcher urlForPhoto:self.photoDetails format:FlickrPhotoFormatLarge];
-            bits = [NSData dataWithContentsOfURL:photoURL];
-            [self.imageCache addDataToCache:bits forKey:photoId];
+            NSLog(@"Loading photo %@ from URL...", self.imageURL);
+            bits = [NSData dataWithContentsOfURL:self.imageURL];
+            [self.imageCache addDataToCache:bits forKey:self.photoId];
         }
-        
-        UIImage *image = [UIImage imageWithData:bits];
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:bits];
             self.imageView.image = image;
             self.scrollView.contentSize = self.imageView.image.size;
             self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
@@ -73,6 +65,7 @@
     }
 
     // add this photo to the top of list of recents, avoiding adding duplicates based on Photo ID
+    /*
     BOOL found = NO;
     NSString *photoId = [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID];
     for (NSDictionary *recentPhoto in recents) {
@@ -87,14 +80,15 @@
     
     [prefs setObject:recents forKey:@"TopPlaces.RecentPhotos"];
     [prefs synchronize];
+     */
 }
 
-- (void)setPhotoDetails:(NSDictionary *)photoDetails
+- (void)setImageURL:(NSURL *)imageURL
 {
-    if (_photoDetails != photoDetails) {
-        _photoDetails = photoDetails;
-        [self addPhotoToRecents];
-        if (self.view.window) [self loadPhotoImage];
+    if (_imageURL != imageURL) {
+        _imageURL = imageURL;
+        self.photoId = [NSString stringWithFormat:@"%d", [self.imageURL hash]];
+        [self loadPhotoImage];
     }
 }
 
@@ -107,7 +101,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (self.photoDetails) [self loadPhotoImage];
+    if (self.imageURL) [self loadPhotoImage];
 }
 
 - (void)viewDidUnload

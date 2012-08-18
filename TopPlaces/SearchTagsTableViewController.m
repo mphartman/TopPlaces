@@ -80,7 +80,12 @@
     SearchTag *searchTag = [self.fetchedResultsController objectAtIndexPath:indexPath];
     // Then configure the cell using it ...
     cell.textLabel.text = searchTag.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photos", [searchTag.photos count]];
+    if ([searchTag.photos count] == 1) {
+        cell.detailTextLabel.text = @"1 photo";
+    }
+    else {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photos", [searchTag.photos count]];
+    }
     
     return cell;
 }

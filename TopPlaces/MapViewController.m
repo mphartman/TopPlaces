@@ -9,7 +9,7 @@
 #import "MapViewController.h"
 #import "PhotosTableViewController.h"
 #import "FlickrPlaceAnnotation.h"
-#import "PhotoDetailViewController.h"
+#import "FlickrPhotoDetailViewController.h"
 #import "FlickrPhotoAnnotation.h"
 
 @interface MapViewController () <UISplitViewControllerDelegate>
@@ -155,7 +155,7 @@
     }
     else if ([segue.identifier isEqualToString:@"Show Photo Detail"]) {
         FlickrPhotoAnnotation *photoAnnotation = sender;
-        PhotoDetailViewController *viewController = segue.destinationViewController;
+        FlickrPhotoDetailViewController *viewController = segue.destinationViewController;
         viewController.title = photoAnnotation.title;
         viewController.photoDetails = photoAnnotation.photo;
     }

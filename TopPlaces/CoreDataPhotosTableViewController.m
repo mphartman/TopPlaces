@@ -8,7 +8,7 @@
 
 #import "CoreDataPhotosTableViewController.h"
 #import "Photo.h"
-#import "VacationPhotoDetailViewController.h"
+#import "PhotoDetailViewController.h"
 
 @interface CoreDataPhotosTableViewController ()
 
@@ -27,8 +27,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Photo Detail"]) {
-        VacationPhotoDetailViewController *viewController = segue.destinationViewController;
+        PhotoDetailViewController *viewController = segue.destinationViewController;
         Photo *photo = [self.photos objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        viewController.imageURL = [NSURL URLWithString:photo.imageURL];
     }
 }
 
@@ -57,7 +58,12 @@
     
     Photo *photo = [self.photos objectAtIndex:indexPath.row];
     // Then configure the cell using it ...
-    cell.textLabel.text = photo.title;
+    if (!photo.title || [photo.title length] == 0) {
+        cell.textLabel.text = @"Unknown";
+    }
+    else {
+        cell.textLabel.text = photo.title;
+    }
     
     return cell;
 }

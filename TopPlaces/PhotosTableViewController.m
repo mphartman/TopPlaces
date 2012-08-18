@@ -8,7 +8,7 @@
 
 #import "PhotosTableViewController.h"
 #import "FlickrFetcher.h"
-#import "PhotoDetailViewController.h"
+#import "FlickrPhotoDetailViewController.h"
 #import "MapViewController.h"
 #import "FlickrPhotoAnnotation.h"
 
@@ -103,7 +103,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSDictionary *photo = [self.photos objectAtIndex:indexPath.row];
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        PhotoDetailViewController *viewController = segue.destinationViewController;
+        FlickrPhotoDetailViewController *viewController = segue.destinationViewController;
         viewController.title = cell.textLabel.text;
         viewController.photoDetails = photo;
     }

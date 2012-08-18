@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Piwiggi. All rights reserved.
 //
 
-#import "PhotoDetailViewController.h"
+#import "FlickrPhotoDetailViewController.h"
 
-@interface VacationPhotoDetailViewController : PhotoDetailViewController
+@interface VacationPhotoDetailViewController : FlickrPhotoDetailViewController
 
 @property (nonatomic, strong) UIManagedDocument *vacationDatabase;
 
