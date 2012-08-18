@@ -56,33 +56,6 @@
     dispatch_release(downloadQueue);
 }
 
-- (void)addPhotoToRecents
-{
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *recents = [[prefs objectForKey:@"TopPlaces.RecentPhotos"] mutableCopy];
-    if (!recents) {
-        recents = [NSMutableArray array];
-    }
-
-    // add this photo to the top of list of recents, avoiding adding duplicates based on Photo ID
-    /*
-    BOOL found = NO;
-    NSString *photoId = [self.photoDetails valueForKeyPath:FLICKR_PHOTO_ID];
-    for (NSDictionary *recentPhoto in recents) {
-        if ([photoId isEqualToString:[recentPhoto valueForKeyPath:FLICKR_PHOTO_ID]]) {
-            found = YES;
-            break;
-        }
-    }
-    if (!found && self.photoDetails) {
-        [recents insertObject:self.photoDetails atIndex:0];
-    }
-    
-    [prefs setObject:recents forKey:@"TopPlaces.RecentPhotos"];
-    [prefs synchronize];
-     */
-}
-
 - (void)setImageURL:(NSURL *)imageURL
 {
     if (_imageURL != imageURL) {
