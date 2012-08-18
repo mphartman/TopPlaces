@@ -8,7 +8,7 @@
 
 #import "VacationsTableViewController.h"
 #import "VacationHelper.h"
-#import "VacationViewController.h"
+#import "VacationTableViewController.h"
 
 @interface VacationsTableViewController ()
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

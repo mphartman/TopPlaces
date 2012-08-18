@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VacationViewController : UITableViewController
+@interface VacationTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSString *vacation;
 

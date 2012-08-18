@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Piwiggi. All rights reserved.
 //
 
-#import "VacationViewController.h"
+#import "VacationTableViewController.h"
 
-@interface VacationViewController ()
+@interface VacationTableViewController ()
 
 @end
 
-@implementation VacationViewController
+@implementation VacationTableViewController
 
 @synthesize vacation = _vacation;
 

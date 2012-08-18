@@ -316,11 +316,11 @@
             </objects>
             <point key="canvasLocation" x="1075" y="1297"/>
         </scene>
-        <!--Vacation View Controller-->
+        <!--Vacation Table View Controller-->
         <scene sceneID="Vlr-eN-HGJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LE6-Vu-5fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="c24-IO-wfk" customClass="VacationViewController" sceneMemberID="viewController">
+                <tableViewController id="c24-IO-wfk" customClass="VacationTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="CJw-mp-HP0">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -615,6 +615,9 @@
         <class className="CoreDataTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
         </class>
+        <class className="FlickrPhotoDetailViewController" superclassName="PhotoDetailViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrPhotoDetailViewController.h"/>
+        </class>
         <class className="ItineraryViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ItineraryViewController.h"/>
         </class>
@@ -652,11 +655,11 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="VacationPhotoDetailViewController" superclassName="PhotoDetailViewController">
+        <class className="VacationPhotoDetailViewController" superclassName="FlickrPhotoDetailViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VacationPhotoDetailViewController.h"/>
         </class>
-        <class className="VacationViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VacationViewController.h"/>
+        <class className="VacationTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VacationTableViewController.h"/>
         </class>
         <class className="VacationsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VacationsTableViewController.h"/>
