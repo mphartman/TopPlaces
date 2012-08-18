@@ -31,12 +31,13 @@
 
 - (void)loadPhotoImage
 {
-    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image download", NULL);
+    NSLog(@"Loading Photo ID: %@", self.photoId);
+    dispatch_queue_t downloadQueue = dispatch_queue_create("image fetcher", NULL);
     dispatch_async(downloadQueue, ^{
         
         NSData *bits = [self.imageCache dataFromCacheForKey:self.photoId];
         if (!bits) {
-            NSLog(@"Loading photo %@ from URL...", self.imageURL);
+            NSLog(@"Fetching data from URL %@", self.imageURL);
             bits = [NSData dataWithContentsOfURL:self.imageURL];
             [self.imageCache addDataToCache:bits forKey:self.photoId];
         }
@@ -52,6 +53,7 @@
             CGFloat ratio = MAX(widthRatio, heightRatio);
             [self.scrollView setZoomScale:ratio animated:NO];
         });
+        
     });
     dispatch_release(downloadQueue);
 }
@@ -61,7 +63,7 @@
     if (_imageURL != imageURL) {
         _imageURL = imageURL;
         self.photoId = [NSString stringWithFormat:@"%d", [self.imageURL hash]];
-        [self loadPhotoImage];
+        if (self.imageView.window) [self loadPhotoImage];
     }
 }
 
@@ -74,7 +76,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (self.imageURL) [self loadPhotoImage];
+    //if (self.imageURL) [self loadPhotoImage];
 }
 
 - (void)viewDidUnload
