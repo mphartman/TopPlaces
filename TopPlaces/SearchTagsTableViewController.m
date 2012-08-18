@@ -1,30 +1,29 @@
 //
-//  ItineraryViewController.m
+//  SearchTagsTableViewController.m
 //  TopPlaces
 //
-//  Created by Hartman on 8/16/12.
+//  Created by Hartman on 8/17/12.
 //  Copyright (c) 2012 Piwiggi. All rights reserved.
 //
 
-#import "ItineraryViewController.h"
-#import "Place.h"
+#import "SearchTagsTableViewController.h"
+#import "SearchTag.h"
 #import "VacationHelper.h"
 #import "CoreDataPhotosTableViewController.h"
 
-@interface ItineraryViewController ()
+@interface SearchTagsTableViewController ()
 @property (nonatomic, strong) UIManagedDocument *vacationDatabase;
 @end
 
-@implementation ItineraryViewController
+@implementation SearchTagsTableViewController
 
 @synthesize vacation = _vacation;
 @synthesize vacationDatabase = _vacationDatabase;
 
 - (void)setupFetchedResultsController // attaches an NSFetchRequest to this UITableViewController
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Place"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SearchTag"];
     request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
-    // no predicate because we want ALL the Places
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                         managedObjectContext:self.vacationDatabase.managedObjectContext
@@ -44,8 +43,8 @@
 {
     if (_vacation != vacation) {
         _vacation = vacation;
-         [VacationHelper openVacation:self.vacation usingBlock:^(UIManagedDocument *vacationDatabase){
-             self.vacationDatabase = vacationDatabase;
+        [VacationHelper openVacation:self.vacation usingBlock:^(UIManagedDocument *vacationDatabase){
+            self.vacationDatabase = vacationDatabase;
         }];
     }
 }
@@ -53,9 +52,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Show Photos"]) {
-        Place *place = [self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+        SearchTag *searchTag = [self.fetchedResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
         CoreDataPhotosTableViewController *tvc = segue.destinationViewController;
-        tvc.photos = [place.photos allObjects];
+        tvc.photos = [searchTag.photos allObjects];
     }
 }
 
@@ -74,14 +73,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Vacation Place Cell";
+    static NSString *CellIdentifier = @"Tag Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // ask NSFetchedResultsController for the NSMO at the row in question
-    Place *place = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SearchTag *searchTag = [self.fetchedResultsController objectAtIndexPath:indexPath];
     // Then configure the cell using it ...
-    cell.textLabel.text = place.name;
+    cell.textLabel.text = searchTag.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photos", [searchTag.photos count]];
     
     return cell;
 }
+
 @end

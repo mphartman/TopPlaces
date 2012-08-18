@@ -19,7 +19,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationViewController respondsToSelector:@selector(setVacation:)]) {
-        [segue.destinationViewController setTitle:self.vacation];
         [segue.destinationViewController performSelector:@selector(setVacation:) withObject:self.vacation];
     }
 }

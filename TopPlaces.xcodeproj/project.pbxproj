@@ -39,6 +39,8 @@
 		49E2F1E215DDD283005CE2F3 /* SearchTag+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1E115DDD282005CE2F3 /* SearchTag+Create.m */; };
 		49E2F1E515DDD86B005CE2F3 /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1E415DDD86A005CE2F3 /* ItineraryViewController.m */; };
 		49E2F1E815DDDAE8005CE2F3 /* VacationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1E715DDDAE8005CE2F3 /* VacationViewController.m */; };
+		49E2F1EB15DF1AF9005CE2F3 /* SearchTagsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1EA15DF1AF8005CE2F3 /* SearchTagsTableViewController.m */; };
+		49E2F1EE15DF22DB005CE2F3 /* CoreDataPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E2F1ED15DF22DA005CE2F3 /* CoreDataPhotosTableViewController.m */; };
 		49F4CE8115D355830021C6B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F4CE8015D355830021C6B1 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +103,10 @@
 		49E2F1E415DDD86A005CE2F3 /* ItineraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryViewController.m; sourceTree = "<group>"; };
 		49E2F1E615DDDAE8005CE2F3 /* VacationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VacationViewController.h; sourceTree = "<group>"; };
 		49E2F1E715DDDAE8005CE2F3 /* VacationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VacationViewController.m; sourceTree = "<group>"; };
+		49E2F1E915DF1AF8005CE2F3 /* SearchTagsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTagsTableViewController.h; sourceTree = "<group>"; };
+		49E2F1EA15DF1AF8005CE2F3 /* SearchTagsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTagsTableViewController.m; sourceTree = "<group>"; };
+		49E2F1EC15DF22D9005CE2F3 /* CoreDataPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataPhotosTableViewController.h; sourceTree = "<group>"; };
+		49E2F1ED15DF22DA005CE2F3 /* CoreDataPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataPhotosTableViewController.m; sourceTree = "<group>"; };
 		49F4CE8015D355830021C6B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -189,6 +195,10 @@
 				49E2F1E715DDDAE8005CE2F3 /* VacationViewController.m */,
 				49E2F1E315DDD86A005CE2F3 /* ItineraryViewController.h */,
 				49E2F1E415DDD86A005CE2F3 /* ItineraryViewController.m */,
+				49E2F1E915DF1AF8005CE2F3 /* SearchTagsTableViewController.h */,
+				49E2F1EA15DF1AF8005CE2F3 /* SearchTagsTableViewController.m */,
+				49E2F1EC15DF22D9005CE2F3 /* CoreDataPhotosTableViewController.h */,
+				49E2F1ED15DF22DA005CE2F3 /* CoreDataPhotosTableViewController.m */,
 				49E2F1D615DB2E08005CE2F3 /* VacationPhotoDetailViewController.h */,
 				49E2F1D715DB2E08005CE2F3 /* VacationPhotoDetailViewController.m */,
 				49E3F0E715D49CA300ADC8B0 /* Core Data */,
@@ -324,6 +334,8 @@
 				49E2F1E215DDD283005CE2F3 /* SearchTag+Create.m in Sources */,
 				49E2F1E515DDD86B005CE2F3 /* ItineraryViewController.m in Sources */,
 				49E2F1E815DDDAE8005CE2F3 /* VacationViewController.m in Sources */,
+				49E2F1EB15DF1AF9005CE2F3 /* SearchTagsTableViewController.m in Sources */,
+				49E2F1EE15DF22DB005CE2F3 /* CoreDataPhotosTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
