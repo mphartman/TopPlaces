@@ -36,7 +36,8 @@
         photo.whereTaken = [Place placeWithName:[flickrInfo valueForKeyPath:FLICKR_PHOTO_PLACE_NAME] inManagedObjectContext:context];
         NSArray *tags = [[flickrInfo valueForKeyPath:FLICKR_TAGS] componentsSeparatedByString:@" "];
         for (NSString *tag in tags) {
-            [photo addTagsObject:[SearchTag searchTagWithName:[tag capitalizedString] inManagedContext:context]];
+            SearchTag *searchTag = [SearchTag searchTagWithName:tag inManagedContext:context];
+            if (searchTag) [photo addTagsObject:searchTag];
         }
     }
     else {

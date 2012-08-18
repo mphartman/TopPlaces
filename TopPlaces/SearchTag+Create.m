@@ -17,10 +17,12 @@
         return nil;
     }
     
+    NSString *tagName = [name capitalizedString];
+    
     SearchTag *tag = nil;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"SearchTag"];
-    request.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];
+    request.predicate = [NSPredicate predicateWithFormat:@"name = %@", tagName];
     
     NSError *error;
     NSArray *matches = [context executeFetchRequest:request error:&error];
@@ -30,7 +32,7 @@
     }
     else if ([matches count] == 0) {
         tag = [NSEntityDescription insertNewObjectForEntityForName:@"SearchTag" inManagedObjectContext:context];
-        tag.name = name;
+        tag.name = tagName;
     }
     else {
         tag = [matches lastObject];
